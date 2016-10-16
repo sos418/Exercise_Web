@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+    <head>
+        <title>
+            yzu1021803
+        </title>
+        <meta charset="UTF8">
+    <script>
+    //Image convert ASCII
+        var go=function(){
+           
+            var f=document.getElementById("myfile");
+            if(f.files && f.files[0])
+                {
+                    var reader=new FileReader();
+                    reader.onload=function(event)
+                    {
+                        var img=document.createElement("img");
+                        img.src=event.target.result;
+                        var cv=document.getElementById("mycanvas");   
+                        var ctx=cv.getContext("2d");
+                        ctx.drawImage(img,0,0);   
+                        var d=ctx.getImageData(0,0,img.width,img.height).data;
+                        var r,g,b,a;
+                        var red,green,blue;
+                        //HTML架構
+                        var htmlstart="<!DOCTYPE html><html><head><title>yzu1021803</title><style>body{line-height: 8px;}</style></head><body>";
+                        var htmlend="</body></html>";
+                        var count=1;
+
+                        for(var i=0;i<d.length;i+=4)
+                        {
+                            r=d[i];
+                            g=d[i+1];
+                            b=d[i+2];
+                            a=d[i+3];
+                            htmlstart=htmlstart+" <font style='color:rgb("+r+","+g+","+b+");' size = '-8'>0</font>";
+                            //長度到達寬時，換行
+                            if(i==(img.width)*4*count)
+                            {
+                                htmlstart+="</br>";
+                                count+=1;
+                            }
+                         }
+                         var txtbox=document.getElementById("mytextbox");
+                         txtbox.value=htmlstart+htmlend;
+                    }
+                    reader.readAsDataURL(f.files[0]);
+                }
+        }
+    </script>
+    </head>
+    <body>
+    <font style='color:rgb(250,0,0);' size='0'>please select an image</font>
+    <input type="file" onchange="go();" id="myfile">
+    <canvas id="mycanvas" width="250" height="250" style="border:1px"></canvas>
+    <textarea id="mytextbox" rows="25" cols="50"></textarea>
+        <br>
+    </body>
+</html>
