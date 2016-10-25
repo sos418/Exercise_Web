@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    </head>
+<body>
+
+<canvas id="myCanvas" width="250" height="250" style="border:5px solid #d3d3d3;">
+    
+</canvas>
+
+
+<script>
+    var ctx = document.getElementById("myCanvas").getContext("2d");
+    ctx.font = "20px";
+    ctx.fillText("白玉蘭度",20,230);
+    //畫三個圓
+        for(i=60;i<=180;i+=42)
+        {
+        ctx.moveTo(50,50);
+        ctx.beginPath();
+        ctx.arc(i,i,30,0,2*Math.PI);
+        ctx.stroke();
+        }
+    //畫斜線
+        ctx.moveTo(220,220);
+        ctx.lineTo(165,165);
+        ctx.stroke();
+    
+</script>
+
+</body>
+</html>
+
