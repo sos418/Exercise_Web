@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page Title</title>
+</head>
+
+<body> 請輸入一串數字(數字範圍0-100,不超過20個，以逗點隔開):
+    <input type="text" id="myinput">
+    <br>
+    <button type="button" onclick="myFunction()">Click Me!</button>
+    <canvas id="mycanvas" width="250" height="250"></canvas>
+    <script>
+        function myFunction() {
+            var ctx = document.getElementById("mycanvas").getContext("2d");
+            ctx.beginPath();
+            ctx.moveTo(0, 100);
+            ctx.lineTo(0, 0);
+            ctx.moveTo(0, 100);
+            ctx.lineTo(100, 100);
+            ctx.stroke();
+            var data = document.getElementById("myinput").value;
+            if (data.length > 0) {
+                var d = data.split(",");
+                ctx.beginPath();
+                ctx.fillStyle = "#FF0000";
+                ctx.moveTo(0, 0);
+                for (var i = 0; i < d.length; i++) {
+                    if (d[i] > 100 || d[i] < 0) {
+                        alert('輸入錯誤，重新檢查');
+                        ctx.clearRect(0, 0, 250, 250);
+                        break;
+                    }
+                    ctx.fillRect(0 + 10 * i, 100 - d[i], 10, d[i]);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
