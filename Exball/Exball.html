@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        function Ball(a, b, c, d, e,s) {
+            this.x = a;
+            this.y = b;
+            this.dx = c;
+            this.dy = d;
+            this.r = e;
+            this.col = s;
+            this.draw = function (pcanvas) {
+                var ctx = pcanvas.getContext('2d');
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, true);
+                ctx.fillStyle = this.col;
+                ctx.closePath();
+                ctx.fill();
+                
+            }
+            this.moving = function () {
+                this.x = this.x + this.dx;
+                this.y = this.y + this.dy;
+            }
+            this.bump = function (n) {
+                if (n == 0) this.dx = -this.dx;
+                else this.dy = -this.dy;
+            }
+        }
+        var list = [];
+
+        function myclick(event) {
+            var s = "#"+((1<<24)*Math.random()|0).toString(16);
+            list.push(new Ball(event.x, event.y, 5, 5, 20, s))
+        }
+
+        function anim() {
+            var mycanvas = document.getElementById('mycanvas');
+            var ctx = mycanvas.getContext('2d');
+            ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
+            for (var i = 0; i < list.length; i++) {
+                list[i].moving();
+                list[i].draw(mycanvas);
+                if (list[i].x <= 0 || list[i].x >= 600) list[i].bump(0);
+                if (list[i].y <= 0 || list[i].y >= 300) list[i].bump(1);
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <canvas id='mycanvas' width="600" height="300"></canvas>
+    <script>
+        var mycanvas = document.getElementById('mycanvas');
+        mycanvas.addEventListener('mousedown', myclick, false);
+        setInterval(anim, 15);
+    </script>
+</body>
+
+</html>
