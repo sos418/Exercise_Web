@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+
+<head>
+    <script>
+        var time = 0;
+        
+        function Ball(x, y, dx, dy, r, t0,s) {
+            this.x = x;
+            this.y = y;
+            this.Vx = dx;
+            this.Vy = dy;
+            this.r = r;
+            this.nowX = x;
+            this.nowY = y;
+            this.t0 = t0;
+            this.col = s;
+            //畫球
+            this.draw = function (pcanvas) {
+                var ctx = pcanvas.getContext('2d');
+                ctx.beginPath();
+                ctx.fillStyle = this.col;
+                ctx.arc(this.nowX, this.nowY, this.r, 0, Math.PI * 2, true);
+                ctx.closePath();
+                ctx.fill();
+            }
+            //球的移動
+            this.moving = function () {
+                var t = (time - this.t0);
+                this.nowX = this.x + this.Vx * t;
+                this.nowY = this.y + this.Vy * t + (1 * t * t) / 2;
+            }
+        }
+        var list = [];
+
+        function myclick(event) {
+            var s = "#" + ((1 << 24) * Math.random() | 0).toString(16); //隨機顏色
+            for (var i = 0; i < 20; i++) {
+                list.push(new Ball(event.x, event.y, Math.random() * 20 - 10, -(Math.random() * 25 - 6), 6, time,s));
+            }
+        }
+
+        function anim() {
+            time++;
+            var mycanvas = document.getElementById('mycanvas');
+            var ctx = mycanvas.getContext('2d');
+            ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
+            for (var i = 0; i < list.length; i++) {
+                list[i].moving();
+                list[i].draw(mycanvas);
+                if (list[i].nowX <= 0 || list[i].nowX >= 1000) list.splice(i, 1);
+                if (list[i].nowY >= 500) list.splice(i, 1);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!--<marquee direction="right"><img src='cloud.png'></marquee>-->
+    <canvas id='mycanvas' width="600" height="300"></canvas>
+    <script>
+        var mycanvas = document.getElementById('mycanvas');
+        mycanvas.addEventListener('mousedown', myclick, false);
+        setInterval(anim, 30);
+    </script>
+</body>
+
+</html>
