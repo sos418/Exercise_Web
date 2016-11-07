@@ -15,11 +15,14 @@
                     var reader=new FileReader();
                     reader.onload=function(event)
                     {
+                        //建立img物件
                         var img=document.createElement("img");
                         img.src=event.target.result;
+                        //抓取canvas的ID
                         var cv=document.getElementById("mycanvas");   
                         var ctx=cv.getContext("2d");
-                        ctx.drawImage(img,0,0);   
+                        ctx.drawImage(img,0,0);  
+                        
                         var d=ctx.getImageData(0,0,img.width,img.height).data;
                         var r,g,b,a;
                         var red,green,blue;
