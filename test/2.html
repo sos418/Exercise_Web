@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>yzu1021803</title>
+</head>
+
+<body>
+    <ul>
+        <li>請輸入幾組號碼:
+            <input type="number" id="myinput">
+        </li>
+        <li>請輸入號碼範圍(從小到大):從
+            <input type="number" id="myinput2">到
+            <input type="number" id="myinput3">
+        </li>
+    </ul>
+    <br>
+    <button type="button" onclick="myFunction()">Click Me!</button>
+    
+   <script>
+    function myFunction() {
+        var myinput = document.getElementById("myinput").value;
+        var myinput2 = document.getElementById("myinput2").value;
+        var myinput3 = document.getElementById("myinput3").value; 
+        
+        var countNumber = Number(myinput);
+        var firstNumber = Number(myinput2);
+        var lastNumber = Number(myinput3);
+        
+        //隨機產生數字
+        var numbers = new Array(lastNumber + 1 - firstNumber);　　　
+        var i = 0, j = 0, k = 0;　　　
+        for (i = 0; i < lastNumber - firstNumber; i++)　　　 {　　　　
+            numbers[i] = i + 1 + firstNumber;　　　
+        }　　　
+        for (i = 1; i <= 1000; i++)　　　 {　　　　
+            j = Math.floor(Math.random() * (lastNumber - firstNumber));　　　　
+            k = Math.floor(Math.random() * (lastNumber - firstNumber));　　　　
+            numbers[lastNumber - firstNumber] = numbers[j];　　　　
+            numbers[j] = numbers[k];　　　　
+            numbers[k] = numbers[lastNumber - firstNumber];　　　
+        }
+        
+        var sortnumbers = new Array(countNumber);
+        for(var ii = 0;ii<countNumber;ii++){
+            sortnumbers[ii] = numbers[ii];
+        }
+        
+        //號碼排序
+        function sortNumber(a,b)
+        {
+            return a - b
+        }
+        sortnumbers.sort(sortNumber);
+        
+        //現在日期和時間
+        var d = new Date();
+        
+        //顯示數字
+        var show = "";
+        for(var aa = 0 ; aa<countNumber ; aa++){
+            show = show + sortnumbers[aa] + ",";
+        }
+        
+        alert(d + "\n中獎號碼:" + show);
+        
+    }
+</script>
+    
+</body>
+
+</html>
