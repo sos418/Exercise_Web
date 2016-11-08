@@ -19,3 +19,129 @@ output
 簽單
 
 簽單是顯示出來的意思？
+
+<!doctype html>
+<html>
+    <head>
+        <title>  樂透選號  </title>
+        <meta charset="UTF8">
+ <style type="text/css">
+h1 {
+  font-size: 30pt;
+  text-align:center;
+  margin: 0px
+}
+
+div {
+  margin: 0px;
+  padding: 0px;
+  border: solid gray;
+  text-align: center;
+  font-size: 25pt;
+  float: left;
+}
+
+div.numsel {
+  width:32%;
+}
+
+div.final {
+  padding: 10px;
+  width:96%;
+}
+
+span {
+  color: midnightblue;
+  font-size: 30pt;
+  font-weight: bold;
+}
+
+</style>
+
+<script type="text/javascript">
+var howmuch =1;
+var myMin = 1;
+var myMax = 49;
+var myNum = "x";
+
+function showNum(){
+  objmin.innerHTML = howmuch;
+  objmin.innerHTML = myMin;
+  objmax.innerHTML = myMax;
+  objnum.innerHTML = "→" + myNum + "←";
+}
+
+function changemuch(){
+  var temp;
+  temp = parseInt(prompt("設定幾組：" , howmuch));
+  if (isNaN(temp)) { alert("偵測出非數字，最小值不變。"); return; }
+  if ( temp >= 1 ) { alert("最小值 >= 最大值，最小值不變。"); return; }
+  howmuch = temp;
+  showNum();
+}
+    
+function changeMin(){
+  var temp;
+  temp = parseInt(prompt("設定最小值：" , myMin));
+  if (isNaN(temp)) { alert("偵測出非數字，最小值不變。"); return; }
+  if ( temp >= myMax ) { alert("最小值 >= 最大值，最小值不變。"); return; }
+  myMin = temp;
+  showNum();
+}
+
+function changeMax(){
+  var temp;
+  temp = parseInt(prompt("設定最大值：" , myMax));
+  if (isNaN(temp)) { alert("偵測出非數字，最大值不變。"); return; }
+  if ( temp <= myMin ) { alert("最大值 <= 最小值，最大值不變。"); return; }
+  myMax = temp;
+  showNum();
+}
+
+function GO(){
+  var temp = parseInt( Math.random()*(myMax - myMin + 1) ) + myMin;
+  myNum = temp;
+  showNum();
+}
+
+</script>
+
+</head>
+ 
+<body>
+
+<h1>樂透選號程式</h1>
+
+<div class="numsel" onclick="changehowmuch();">
+設定幾組：<br />
+<span id="mydisphowmuch">1</span>
+</div>
+
+<div class="numsel" onclick="changeMin();">
+設定最小值：<br />
+<span id="mydispmin">MIN</span>
+</div>
+
+<div class="numsel" onclick="changeMax();">
+設定最大值：<br />
+<span id="mydispmax">MAX</span>
+</div>
+
+
+<div class="final" onclick="GO();">
+按此選號：<br />
+<span id="mydispnum">未選號</span>
+</div>
+
+<script type="text/javascript">
+var objmin = document.getElementById("mydisphowmuch");
+var objmin = document.getElementById("mydispmin");
+var objnum = document.getElementById("mydispnum");
+var objmax = document.getElementById("mydispmax");
+showNum();
+</script>
+
+
+</body>
+</html>
+
