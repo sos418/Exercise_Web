@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>yzu1021803</title>
+    <style>
+        div      { float:left; margin:10px;}
+        img      { width:300px; }
+        #origin  { width:480px; }
+        #blur {
+            filter:blur(10px);
+            -webkit-filter:blur(10px);
+        }  
+        #contrast {
+            filter:contrast(500%);
+            -webkit-filter:contrast(500%);
+        }
+        #hue-rotate {
+            filter:hue-rotate(120deg);
+            -webkit-filter:hue-rotate(120deg);
+        }
+        #sepia {
+            filter:sepia(120%);
+            -webkit-filter:sepia(120%);
+        }
+        #saturate {
+            filter:saturate(5);
+            -webkit-filter:saturate(5);
+        }
+            
+    </style>
+</head>
+<body>
+    <img id="origin" src="media/sydney.jpg">
+    <div>
+      <img id="blur" src="media/sydney.jpg">
+      <br><span>blur(10px)</span></div>
+    <div>
+      <img id="contrast" src="media/sydney.jpg">
+      <br><span>contrast(500%)</span></div>
+    <div>
+      <img id="hue-rotate" src="media/sydney.jpg">
+      <br><span>hue-rotate(120deg)</span>
+    </div>
+    <div>
+      <img id="sepia" src="media/sydney.jpg">
+      <br><span>sepia(120%)</span>
+    </div>
+    <div>
+      <img id="saturate" src="media/sydney.jpg">
+      <br><span>saturate(5)</span>
+    </div>
+</body>
+</html>
